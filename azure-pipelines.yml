@@ -5,9 +5,25 @@ pool:
   name: web-test-pool
 
 steps:
+
 - checkout: self
 
-- script: |
-    sudo cp -r $(Build.SourcesDirectory)/* /var/www/html/
-    sudo systemctl restart nginx
+- task: CopyFilesOverSSH@0
+  displayName: 'Copy Website Files'
+  inputs:
+    sshEndpoint: 'svc-deploy'
+    sourceFolder: '$(Build.SourcesDirectory)'
+    contents: |
+      **
+    targetFolder: '/tmp/website'
+    cleanTargetFolder: true
+
+- task: SSH@0
   displayName: 'Deploy Website'
+  inputs:
+    sshEndpoint: 'svc-deploy'
+    runOptions: 'commands'
+    commands: |
+      sudo mkdir -p /var/www/html
+      sudo cp -r /tmp/website/* /var/www/html/
+      sudo systemctl restart nginx
