@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Pipeline Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <div class="status-badge">Pipeline: Active</div>
+        <h1>CI/CD Deployment Test</h1>
+        <p class="description">
+            This is a simple static website used to verify that our CI/CD pipeline is running, building, and deploying successfully.
+        </p>
+        <div class="info-box">
+            <p><strong>Environment:</strong> Production / Test</p>
+            <p><strong>Last Checked:</strong> <span id="timestamp">Loading...</span></p>
+        </div>
+        <button id="verify-btn">Trigger Verification Test</button>
+        <div id="test-result" class="hidden"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
