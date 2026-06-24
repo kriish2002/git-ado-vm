@@ -5,10 +5,9 @@ pool:
   name: web-test-pool
 
 steps:
-
 - checkout: self
 
 - script: |
-    echo "Repository Files:"
-    dir
-  displayName: 'Show Files'
+    sudo cp -r $(Build.SourcesDirectory)/* /var/www/html/
+    sudo systemctl restart nginx
+  displayName: 'Deploy Website'
